@@ -13,8 +13,8 @@ class Food extends Model
     use HasFactory, softDeletes;
 
     protected $fillable = [
-        'name', 'description', 'ingredients', 'price', 'rate', 'types',
-        'picturePath'
+        'name', 'description', 'ingredients', 'price', 'discount', 'rate', 'types',
+        'picturePath', 'location'
     ];
 
     public function getCreatedAtAttribute($value)
