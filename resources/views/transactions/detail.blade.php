@@ -1,3 +1,5 @@
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -16,16 +18,38 @@
                             <div class="text-sm">Status Saat Ini :</div>
                             <div class="text-xl font-bold mb-4">{{ $item->status }}</div>
                             <div class="text-sm mb-1">Ubah Status</div>
-                            <a href="{{ route('transactions.changeStatus', ['id' => $item->id, 'status' => 'Sedang Dikirim']) }}"
-                                class="bg-blue-500 hover:bg-blue-700 text-white font-bold px-2 py-2 rounded block text-center w-full mb-2">
+                            <a href="{{
+                                route('transactions.changeStatus', ['id' => $item->id, 'status' => 'Sedang Dikirim']) }}"
+                                class="bg-blue-500 hover:bg-blue-700 text-white font-bold px-2 py-2 rounded block text-center w-full mb-2"
+                                onclick="Swal.fire({
+                                    icon: 'success',
+                                    title: 'Yuhuuu',
+                                    text: 'Kamu berhasil ubah status pengiriman!',
+                                    showCancelButton: false,
+                                    showConfirmButton: false
+                                })">
                                 Sedang Dikirim
                             </a>
                             <a href="{{ route('transactions.changeStatus', ['id' => $item->id, 'status' => 'Terkirim']) }}"
-                                class="bg-green-500 hover:bg-green-700 text-white font-bold px-2 py-2 rounded block text-center w-full mb-2">
+                                class="bg-green-500 hover:bg-green-700 text-white font-bold px-2 py-2 rounded block text-center w-full mb-2"
+                                onclick="Swal.fire({
+                                    icon: 'success',
+                                    title: 'Yuhuuu',
+                                    text: 'Kamu berhasil ubah status pengiriman!',
+                                    showCancelButton: false,
+                                    showConfirmButton: false
+                                })">
                                 Terkirim
                             </a>
                             <a href="{{ route('transactions.changeStatus', ['id' => $item->id, 'status' => 'Dibatalkan']) }}"
-                                class="bg-red-500 hover:bg-red-700 text-white font-bold px-2 py-2 rounded block text-center w-full mb-2">
+                                class="bg-red-500 hover:bg-red-700 text-white font-bold px-2 py-2 rounded block text-center w-full mb-2"
+                                onclick="Swal.fire({
+                                    icon: 'success',
+                                    title: 'Yuhuuu',
+                                    text: 'Kamu berhasil ubah status pengiriman!',
+                                    showCancelButton: false,
+                                    showConfirmButton: false
+                                })">
                                 Dibatalkan
                             </a>
                     </div>
@@ -69,14 +93,18 @@
                         </div>
                         <div class="flex flex-wrap mb-4">
                             <div class="w-2/6">
+                                <div class="text-sm">Jenis Kelamin</div>
+                                <div class="text-xl font-bold">{{ $item->user->gender }}</div>
+                            </div>
+                            <div class="w-2/6">
                                 <div class="text-sm">Alamat Rumah</div>
                                 <div class="text-xl font-bold">{{ $item->user->address }}</div>
                             </div>
-                            <div class="w-2/6">
+                            <div class="w-1/6">
                                 <div class="text-sm">Nomor Rumah</div>
                                 <div class="text-xl font-bold">{{ $item->user->houseNumber }}</div>
                             </div>
-                            <div class="w-2/6">
+                            <div class="w-1/6">
                                 <div class="text-sm">RT / RW</div>
                                 <div class="text-xl font-bold">{{ $item->user->rtrw }}</div>
                             </div>

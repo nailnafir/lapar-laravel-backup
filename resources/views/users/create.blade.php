@@ -65,13 +65,22 @@
                         </div>
                     </div>
                     <div class="flex flex-wrap -mx-3 mb-6">
-                        <div class="w-full px-3">
+                        <div class="w-full md:w-1/2 px-3">
+                            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-gender">
+                                Jenis Kelamin
+                            </label>
+                            <select name="gender" class="appearance-none block w-full bg-gray-200 text-gray-700 border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-gender">
+                                <option value="LAKI-LAKI">LAKI-LAKI</option>
+                                <option value="PEREMPUAN">PEREMPUAN</option>
+                            </select>
+                        </div>
+                        <div class="w-full md:w-1/2 px-3">
                             <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-kasta">
                                 Kasta
                             </label>
                             <select name="roles" class="appearance-none block w-full bg-gray-200 text-gray-700 border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-kasta">
-                                <option value="USER">User</option>
-                                <option value="ADMIN">Admin</option>
+                                <option value="USER">USER</option>
+                                <option value="ADMIN">ADMIN</option>
                             </select>
                         </div>
                     </div>

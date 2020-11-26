@@ -19,6 +19,7 @@
                             <th class="border px-6 py-4">Nomor</th>
                             <th class="border px-6 py-4">Nama Lengkap</th>
                             <th class="border px-6 py-4">Email</th>
+                            <th class="border px-6 py-4">Jenis Kelamin</th>
                             <th class="border px-6 py-4">Kasta</th>
                             <th class="border px-6 py-4">Kelola</th>
                         </tr>
@@ -30,6 +31,7 @@
                                 <td class="border px-4 py-4">{{ $nomor }}</td>
                                 <td class="border px-4 py-4">{{ $item->name }}</td>
                                 <td class="border px-4 py-4">{{ $item->email }}</td>
+                                <td class="border px-4 py-4">{{ $item->gender }}</td>
                                 <td class="border px-4 py-4">{{ $item->roles }}</td>
                                 <td class="border px-4 py-4 text-center">
                                     <a href="{{ route('users.edit', $item->id)}}" class="inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mx-2 rounded">
@@ -44,7 +46,7 @@
                         <?php $nomor++ ?>
                         @empty
                             <tr>
-                                <td colspan="5" class="border text-center p-5">Data tidak ditemukan!</td>
+                                <td colspan="6" class="border text-center p-5">Data tidak ditemukan!</td>
                             </tr>
                         @endforelse
                     </tbody>
