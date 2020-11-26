@@ -26,13 +26,13 @@
                         <?php $nomor = 1 ?>
                         @forelse ($transactions as $item)
                             <tr>
-                                <td class="border px-4 py-4">{{ $nomor }}</td>
-                                <td class="border px-4 py-4">{{ $item->food->name }}</td>
-                                <td class="border px-4 py-4">{{ $item->user->name }}</td>
-                                <td class="border px-4 py-4">{{ $item->quantity }}</td>
-                                <td class="border px-4 py-4">{{ number_format($item->total) }}</td>
-                                <td class="border px-4 py-4">{{ $item->status }}</td>
-                                <td class="border px-4 py-4 text-center">
+                                <td class="border px-6 py-4">{{ $nomor }}</td>
+                                <td class="border px-6 py-4">{{ $item->food->name }}</td>
+                                <td class="border px-6 py-4">{{ $item->user->name }}</td>
+                                <td class="border px-6 py-4">{{ $item->quantity }}</td>
+                                <td class="border px-6 py-4">{{ number_format($item->total) }}</td>
+                                <td class="border px-6 py-4">{{ $item->status }}</td>
+                                <td class="border px-6 py-4 text-center">
                                     <a href="{{ route('transactions.show', $item->id)}}" class="inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mx-2 rounded">
                                         Lihat
                                     </a>

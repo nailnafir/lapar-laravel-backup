@@ -1,3 +1,5 @@
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -28,18 +30,20 @@
                         <?php $nomor = 1 ?>
                         @forelse ($user as $item)
                             <tr>
-                                <td class="border px-4 py-4">{{ $nomor }}</td>
-                                <td class="border px-4 py-4">{{ $item->name }}</td>
-                                <td class="border px-4 py-4">{{ $item->email }}</td>
-                                <td class="border px-4 py-4">{{ $item->gender }}</td>
-                                <td class="border px-4 py-4">{{ $item->roles }}</td>
-                                <td class="border px-4 py-4 text-center">
+                                <td class="border px-6 py-4">{{ $nomor }}</td>
+                                <td class="border px-6 py-4">{{ $item->name }}</td>
+                                <td class="border px-6 py-4">{{ $item->email }}</td>
+                                <td class="border px-6 py-4">{{ $item->gender }}</td>
+                                <td class="border px-6 py-4">{{ $item->roles }}</td>
+                                <td class="border px-6 py-4 text-center">
                                     <a href="{{ route('users.edit', $item->id)}}" class="inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mx-2 rounded">
                                         Ubah
                                     </a>
                                     <form action="{{ route('users.destroy', $item->id) }}" method="POST" class="inline-block">
                                         {!! method_field('delete') . csrf_field() !!}
-                                        <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 mx-2 rounded">Hapus</button>
+                                        <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 mx-2 rounded">
+                                            Hapus
+                                        </button>
                                     </form>
                                 </td>
                             </tr>
