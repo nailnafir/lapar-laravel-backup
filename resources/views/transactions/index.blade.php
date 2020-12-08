@@ -8,6 +8,7 @@
     </x-slot>
 
     <div class="py-12">
+        <?php $nomor = 0 ?>
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white">
                 <table class="table-auto w-full">
@@ -23,10 +24,9 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php $nomor = 1 ?>
                         @forelse ($transactions as $item)
                             <tr>
-                                <td class="border px-6 py-4">{{ $nomor }}</td>
+                                <td class="border px-6 py-4">{{ ++$nomor + ($transactions->currentPage()-1) * $transactions->perPage() }}</td>
                                 <td class="border px-6 py-4">{{ $item->food->name }}</td>
                                 <td class="border px-6 py-4">{{ $item->user->name }}</td>
                                 <td class="border px-6 py-4">{{ $item->quantity }}</td>
@@ -44,7 +44,6 @@
                                     </form>
                                 </td>
                             </tr>
-                        <?php $nomor++ ?>
                         @empty
                             <tr>
                                 <td colspan="7" class="border text-center p-5">Data tidak ditemukan!</td>

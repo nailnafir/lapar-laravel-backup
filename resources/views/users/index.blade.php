@@ -8,6 +8,7 @@
     </x-slot>
 
     <div class="py-12">
+        <?php $nomor = 0 ?>
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="mb-10">
                 <a href="{{ route('users.create') }}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
@@ -27,10 +28,9 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php $nomor = 1 ?>
                         @forelse ($user as $item)
                             <tr>
-                                <td class="border px-6 py-4">{{ $nomor }}</td>
+                                <td class="border px-6 py-4">{{ ++$nomor + ($user->currentPage()-1) * $user->perPage() }}</td>
                                 <td class="border px-6 py-4">{{ $item->name }}</td>
                                 <td class="border px-6 py-4">{{ $item->email }}</td>
                                 <td class="border px-6 py-4">{{ $item->gender }}</td>
@@ -47,7 +47,6 @@
                                     </form>
                                 </td>
                             </tr>
-                        <?php $nomor++ ?>
                         @empty
                             <tr>
                                 <td colspan="6" class="border text-center p-5">Data tidak ditemukan!</td>

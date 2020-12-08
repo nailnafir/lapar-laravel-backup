@@ -6,6 +6,7 @@
     </x-slot>
 
     <div class="py-12">
+        <?php $nomor = 0 ?>
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="mb-10">
                 <a href="{{ route('food.create') }}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
@@ -27,10 +28,9 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php $nomor = 1 ?>
                         @forelse ($food as $item)
                             <tr>
-                                <td class="border px-6 py-4">{{ $nomor }}</td>
+                                <td class="border px-6 py-4">{{ ++$nomor + ($food->currentPage()-1) * $food->perPage() }}</td>
                                 <td class="border px-6 py-4">{{ $item->name }}</td>
                                 <td class="border px-6 py-4">{{ number_format($item->price) }}</td>
                                 <td class="border px-6 py-4">{{ $item->discount }}</td>
@@ -47,7 +47,6 @@
                                     </form>
                                 </td>
                             </tr>
-                        <?php $nomor++ ?>
                         @empty
                             <tr>
                                 <td colspan="8" class="border text-center p-5">Data tidak ditemukan!</td>
