@@ -28,7 +28,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse ($user as $item)
+                        @forelse ($user as $item) 
                             <tr>
                                 <td class="border px-6 py-4">{{ ++$nomor + ($user->currentPage()-1) * $user->perPage() }}</td>
                                 <td class="border px-6 py-4">{{ $item->name }}</td>

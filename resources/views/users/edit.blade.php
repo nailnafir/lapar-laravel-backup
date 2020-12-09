@@ -72,8 +72,8 @@
                             </label>
                             <select name="gender" class="appearance-none block w-full bg-gray-200 text-gray-700 border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-gender">
                                 <option value="{{ $item->gender }}">{{ $item->gender }}</option>
-                                <option value="LAKI-LAKI">LAKI-LAKI</option>
-                                <option value="PEREMPUAN">PEREMPUAN</option>
+                                <option value="Laki-laki">Laki-laki</option>
+                                <option value="Perempuan">Perempuan</option>
                             </select>
                         </div>
                         <div class="w-full md:w-1/2 px-3">

@@ -86,7 +86,7 @@ class TransactionController extends Controller
     public function destroy(Transaction $transaction)
     {
         $transaction->delete();
-        redirect()->route('transactions.index');
+        return redirect()->route('transactions.index');
     }
 
     public function changeStatus(Request $request, $id, $status)
