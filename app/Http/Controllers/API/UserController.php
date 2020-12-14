@@ -2,42 +2,52 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Actions\Fortify\PasswordValidationRules;
+use Exception;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Helpers\ResponseFormatter;
 use App\Http\Controllers\Controller;
-use Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use App\Actions\Fortify\PasswordValidationRules;
+use Facade\FlareClient\Http\Response;
 
 class UserController extends Controller
 {
-
     use PasswordValidationRules;
 
-    // Untuk login
+    /**
+     * @param Request $request
+     * @return mixed
+     */
+    public function fetch(Request $request)
+    {
+        return ResponseFormatter::success($request->user(),'Data profile user berhasil diambil');
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Exception
+     */
     public function login(Request $request)
     {
         try {
-            // Validasi input
             $request->validate([
                 'email' => 'email|required',
                 'password' => 'required'
             ]);
 
-            // Mengecek credentials (login)
             $credentials = request(['email', 'password']);
             if (!Auth::attempt($credentials)) {
-                return ResponseFormatter::error([
-                    'message' => 'unauthorized'
-                ], 'Authentication Failed', 500);
+                return Response()->json([
+                    'message' => 'Wrong email or password',
+                ], 422);
             }
 
-            // Jika hash tidak sesuai maka beri error
             $user = User::where('email', $request->email)->first();
-            if (!Hash::check($request->password, $user->password, [])) {
+            if ( ! Hash::check($request->password, $user->password, [])) {
                 throw new \Exception('Invalid Credentials');
             }
 
@@ -46,20 +56,26 @@ class UserController extends Controller
                 'access_token' => $tokenResult,
                 'token_type' => 'Bearer',
                 'user' => $user
-            ], 'Authenticated');
-        } catch(Exception $error) {
-            return ResponseFormatter::error([
-                'message' => 'Something went wrong',
-                'error' => $error
-            ], 'Authentication Failed', 500);
+            ],'Authenticated');
+        } catch (Exception $errors) {
+            return Response()->json([
+                'message' => 'The given data was invalid.',
+                'errors' => $errors->validator->errors(),
+            ], 422);
         }
     }
 
-    public function register (Request $request) {
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Exception
+     */
+    public function register(Request $request)
+    {
         try {
             $request->validate([
-                'name' => ['required', 'string', 'max:255'],
-                'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+                'name' => 'required|string|max:255',
+                'email' => 'required|string|email|max:255|unique:users',
                 'password' => $this->passwordRules()
             ]);
 
@@ -85,13 +101,13 @@ class UserController extends Controller
                 'access_token' => $tokenResult,
                 'token_type' => 'Bearer',
                 'user' => $user,
-            ]);
+            ], 'Pengguna Berhasil Terdaftar');
 
-        } catch (Exception $error) {
-            return ResponseFormatter::error([
-                'message' => 'Something went wrong',
-                'error' => $error
-            ], 'Authentication Failed', 500);
+        } catch (Exception $errors) {
+            return Response()->json([
+                'message' => 'The given data was invalid.',
+                'errors' => $errors->validator->errors(),
+            ], 422);
         }
     }
 
@@ -99,10 +115,6 @@ class UserController extends Controller
         $token = $request->user()->currentAccessToken()->delete();
 
         return ResponseFormatter::success($token, 'Token Revoked');
-    }
-
-    public function fetch (Request $request) {
-        return ResponseFormatter::success($request->user(), 'Data profil user berhasil diambil');
     }
 
     public function updateProfile(Request $request) {
@@ -120,8 +132,8 @@ class UserController extends Controller
         ]);
 
         if($validator->fails()) {
-            return ResponseFormatter::error([
-                'error' => $validator->errors(),
+            return Response()->json([
+                'errors' => $validator->errors(),
                 'Update photo fails',
                 401
             ]);
