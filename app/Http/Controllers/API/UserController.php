@@ -77,8 +77,6 @@ class UserController extends Controller
                 'name' => 'required|string|max:255',
                 'email' => 'required|string|email|max:255|unique:users',
                 'password' => $this->passwordRules(),
-                'gender' => 'required|string|max:255|in:Laki-laki,Perempuan',
-                'roles' => 'required|string|max:255|in:USER,ADMIN',
                 'address' => 'required|string',
                 'houseNumber' => 'required|string|max:255',
                 'rtrw' => 'required|string|max:255',

@@ -33,25 +33,58 @@ class MidtransController extends Controller
         if($status == 'capture') {
             if($type == 'credit_card') {
                 if($fraud == 'challenge') {
-                    $transaction->status = 'PENDING';
+                    $transaction->status = 'Tertunda';
                 } else {
-                    $transaction->status = 'SUCCESS';
+                    $transaction->status = 'Sukses';
                 }
             }
         } else if ($status == 'settlement') {
-            $transaction->status = 'SUCCESS';
+            $transaction->status = 'Sukses';
         } else if ($status == 'pending') {
-            $transaction->status = 'PENDING';
+            $transaction->status = 'Tertunda';
         } else if ($status == 'deny') {
-            $transaction->status = 'CANCELLED';
+            $transaction->status = 'Dibatalkan';
         } else if ($status == 'expire') {
-            $transaction->status = 'CANCELLED';
+            $transaction->status = 'Dibatalkan';
         } else if ($status == 'cancel') {
-            $transaction->status = 'CANCELLED';
+            $transaction->status = 'Dibatalkan';
         }
 
         // Simpan transaksi
         $transaction->save();
+
+        // Kirimkan email
+        if ($transaction) {
+            if ($status == 'capture' && $fraud == 'accept') {
+                //
+            } else if ($status == 'settlement') {
+                //
+            } else if ($status == 'success') {
+                //
+            } else if ($status == 'capture' && $fraud == 'challenge'
+            ) {
+                return response()->json([
+                    'meta' => [
+                        'code' => 200,
+                        'message' => 'Midtrans Payment Challenge'
+                    ]
+                ]);
+            } else {
+                return response()->json([
+                    'meta' => [
+                        'code' => 200,
+                        'message' => 'Midtrans Payment not Settlement'
+                    ]
+                ]);
+            }
+
+            return response()->json([
+                'meta' => [
+                    'code' => 200,
+                    'message' => 'Midtrans Notification Success'
+                ]
+            ]);
+        }
     }
 
     public function success() {
