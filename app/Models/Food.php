@@ -17,6 +17,17 @@ class Food extends Model
         'picturePath', 'location'
     ];
 
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'rate' => 'integer',
+        'price' => 'integer',
+        'discount' => 'integer'
+    ];
+
     public function getCreatedAtAttribute($value)
     {
         return Carbon::parse($value)->timestamp;

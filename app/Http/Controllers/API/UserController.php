@@ -61,7 +61,7 @@ class UserController extends Controller
             return Response()->json([
                 'message' => 'The given data was invalid.',
                 'errors' => $errors->validator->errors(),
-            ], 422);
+            ], 500);
         }
     }
 

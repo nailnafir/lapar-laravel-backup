@@ -71,10 +71,10 @@ class User extends Authenticatable
         return Carbon::parse($value)->timestamp;
     }
 
-    public function setPasswordAttribute($password)
-    {
-        if ( !empty($password) ) {
-    		$this->attributes['password'] = Hash::make($password);
-		}
-   	 }
+    // public function setPasswordAttribute($password)
+    // {
+    //     if ( !empty($password) ) {
+    // 		$this->attributes['password'] = Hash::make($password);
+	// 	}
+   	//  }
 }
