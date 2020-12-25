@@ -18,8 +18,8 @@ class TransactionController extends Controller
     {
         $id = $request->input('id');
         $limit = $request->input('limit', 6);
-        $food_id = $request->input('name');
-        $status = $request->input('types');
+        $food_id = $request->input('food_id');
+        $status = $request->input('status');
 
         if ($id) {
             $transaction = Transaction::with(['food', 'user'])->find($id);
