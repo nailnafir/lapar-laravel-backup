@@ -24,9 +24,9 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse ($transactions as $item)
+                        @forelse ($transaction as $item)
                             <tr>
-                                <td class="border px-6 py-4">{{ ++$nomor + ($transactions->currentPage()-1) * $transactions->perPage() }}</td>
+                                <td class="border px-6 py-4">{{ ++$nomor + ($transaction->currentPage()-1) * $transaction->perPage() }}</td>
                                 <td class="border px-6 py-4">{{ $item->food->name }}</td>
                                 <td class="border px-6 py-4">{{ $item->user->name }}</td>
                                 <td class="border px-6 py-4">{{ $item->quantity }}</td>
@@ -53,7 +53,7 @@
                 </table>
             </div>
             <div class="text-center mt-5">
-                {{ $transactions->links() }}
+                {{ $transaction->links() }}
             </div>
         </div>
     </div>
